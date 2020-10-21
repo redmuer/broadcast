@@ -12,7 +12,7 @@ class Sign:
             'jsapi_ticket': jsapi_ticket,
             'timestamp': self.__create_timestamp(),
             'url': url,
-            'appid','wx55c990a2c8dcf77b'
+            'appid':'wx55c990a2c8dcf77b'
         }
 
     def __create_nonce_str(self):
