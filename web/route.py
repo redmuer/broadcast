@@ -1,5 +1,6 @@
 #coding: UTF-8
 
+import sys
 import os
 from flask import Flask
 from flask import render_template, request, jsonify, session, redirect, url_for
@@ -142,8 +143,7 @@ def logon():
 
 
 if __name__ == '__main__':
-
-    env.root_dir = os.getcwd()[0:-3]
+    env.root_dir = sys.argv[0][0:-12]
     db_utils = db_utils()
 
     app.run(host='0.0.0.0',port=5000)
