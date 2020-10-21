@@ -141,9 +141,10 @@ def logon():
         result = {'error_code' : "1"}
         return jsonify(result)
 
-#------------------------微信认证--------------------
+#------------------------微信认证--------------------#
 
-@app.route("/weixin/auth", method=['GET'])
+
+@app.route('/weixin/auth', methods=['GET'])
 def weixin_auth():
     signature = request.args.get('signature')
     timestamp = request.args.get('timestamp')
