@@ -1,3 +1,5 @@
+#coding: UTF-8
+
 import sqlite3
 import threading
 from envs.env_param import env

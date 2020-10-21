@@ -1,3 +1,6 @@
+#coding: UTF-8
+
+
 import threading
 import uuid
 from .db_app import db_utils
