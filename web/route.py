@@ -146,4 +146,4 @@ if __name__ == '__main__':
     env.root_dir = sys.argv[0][0:-12]
     db_utils = db_utils()
 
-    app.run(host='0.0.0.0',port=5000)
+    app.run(host='0.0.0.0',port=80)
