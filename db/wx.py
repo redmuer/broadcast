@@ -1,13 +1,5 @@
 #coding: UTF-8
 
-# import json
-#
-# aa = b'{"access_token":"38_SF28exAmNCFjs3V3EjOTlzBYea6iNNWQW7VWP2C-ZG387jrS5yfpexBQcHkXAMz2o9VCrBdxtPMCWWCVzG3k8DEgPT2BDuxRsRJE4Zk7m6mxY00e59y1jwaJ_0QtHVT15oELzlGTWZhBu34XYKEgAHASEY","expires_in":7200}'
-#
-# aa  = json.loads(str(aa, encoding='utf8'))
-#
-# print(aa["access_token"])
-
 import time
 import random
 import string
@@ -33,8 +25,3 @@ class Sign:
         print(string)
         self.ret['signature'] = hashlib.sha1(string.encode("utf8")).hexdigest()
         return self.ret
-
-if __name__ == '__main__':
-    # 注意 URL 一定要动态获取，不能 hardcode
-    sign = Sign('jsapi_ticket', 'http://example.com')
-    print("sign.sign",sign.sign())

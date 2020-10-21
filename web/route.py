@@ -8,6 +8,7 @@ from db.db_app import db_utils
 from envs.env_param import env
 from db.bill import bill_proxy
 from db.product import product_proxy
+from db.wx import Sign
 import hashlib
 import threading
 import datetime
@@ -155,11 +156,30 @@ def logon():
         result = {'error_code' : "1"}
         return jsonify(result)
 
-#------------------------微信认证--------------------#
+#------------------------微信--------------------#
+
+@app.route('/weixin/js_token',methods=['POST'])
+def wexin_js_token():
+    '''
+    生成微信JS-JDK所需的认证
+    :return:
+    '''
+    data = request.get_data(as_text=True)
+    json_data = json.loads(data)
+
+    jsapi_ticket = env.get_wx_tocke()
+
+    sign = Sign(jsapi_ticket, 'http://wx.lbikechina.com/static/wx_test.html')
+
+    return jsonify(sign.sign())
 
 
 @app.route('/weixin/auth', methods=['GET'])
 def weixin_auth():
+    '''
+    用来认证微信的后台Token
+    :return:
+    '''
     signature = request.args.get('signature')
     timestamp = request.args.get('timestamp')
     nonce = request.args.get('nonce')
