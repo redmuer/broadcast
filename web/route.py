@@ -170,7 +170,7 @@ def wexin_js_token():
     jsapi_ticket = env.get_wx_tocke()
 
     sign = Sign(jsapi_ticket, 'http://wx.lbikechina.com/static/wx_test.html')
-
+    print(sign)
     return jsonify(sign.sign())
 
 
