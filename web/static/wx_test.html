@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <script type="text/javascript" src="/static/m/lib/jquery/1.9.1/jquery.min.js"></script>
+    <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <script>
+        $(function(){
+            $.ajax({
+                type: "POST",
+                url: "/bill/list",
+                contentType: "application/json; charset=utf-8",
+                data: JSON.stringify({}),
+                dataType: "json",
+                success: function (message) {
+
+
+                },
+                error: function (message) {
+            	    alert(message)
+                    alert("retry")
+                }
+	        });
+        });
+    </script>
+</head>
+
+<body>
+
+</body>

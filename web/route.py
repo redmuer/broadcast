@@ -9,6 +9,8 @@ from envs.env_param import env
 from db.bill import bill_proxy
 from db.product import product_proxy
 import hashlib
+import threading
+import datetime
 
 import json
 
@@ -20,6 +22,18 @@ def session_check(session):
         return True
     else:
         return False
+
+global start_long
+def fun_timer():
+
+    global  start_long
+    start_long = start_long + 5
+    if start_long > 7000:
+        env.wx_tocken = None
+
+    global timer
+    timer = threading.Timer(5., fun_timer)
+    timer.start()
 
 @app.route('/')
 def hello_world():
@@ -171,5 +185,10 @@ def weixin_auth():
 if __name__ == '__main__':
     env.root_dir = sys.argv[0][0:-12]
     db_utils = db_utils()
+    start_long = 0
+    timer = threading.Timer(1, fun_timer)
+    timer.start()
+
+    env.get_wx_tocke()
 
     app.run(host='0.0.0.0',port=80)
