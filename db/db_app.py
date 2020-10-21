@@ -21,6 +21,7 @@ class db_utils:
         pass
 
     def table_init(self):
+        print("env.root_dir",env.root_dir)
         conn = sqlite3.connect('%s%s' % (env.root_dir, 'db/broadcast.db'))
         print('broadcast successfully')
         print('create table')
