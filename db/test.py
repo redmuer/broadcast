@@ -36,5 +36,7 @@ class Sign:
 
 if __name__ == '__main__':
     # 注意 URL 一定要动态获取，不能 hardcode
-    sign = Sign('jsapi_ticket', 'http://example.com')
+    # sign = Sign('jsapi_ticket', 'http://example.com')
+
+    sign = Sign(jsapi_ticket, 'http://wx.lbikechina.com/static/wx_test.html')
     print("sign.sign",sign.sign())

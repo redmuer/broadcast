@@ -13,6 +13,7 @@ class env:
         if None == cls.wx_tocken:
             cls.wx_tocken = cls.https_wx_tocken()
 
+        print("token : ",cls.wx_tocken)
         return cls.wx_tocken
 
 
