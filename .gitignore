@@ -1,3 +1,4 @@
 /db/broadcast.db
 db/*.pyc
 envs/**.pyc
+*.pyc
