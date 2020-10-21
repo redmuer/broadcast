@@ -8,6 +8,7 @@ from db.db_app import db_utils
 from envs.env_param import env
 from db.bill import bill_proxy
 from db.product import product_proxy
+import hashlib
 
 import json
 
@@ -140,6 +141,30 @@ def logon():
         result = {'error_code' : "1"}
         return jsonify(result)
 
+#------------------------微信认证--------------------
+
+@app.route("/weixin/auth", method=['GET'])
+def weixin_auth():
+    signature = request.args.get('signature')
+    timestamp = request.args.get('timestamp')
+    nonce = request.args.get('nonce')
+    echostr = request.args.get('echostr')
+    token = "bill"
+    tmpArr = [token, timestamp, nonce]
+    tmpArr.sort()
+    sha1 = hashlib.sha1()
+    sha1.update(tmpArr[0].encode('utf-8'))
+    sha1.update(tmpArr[1].encode('utf-8'))
+    sha1.update(tmpArr[2].encode('utf-8'))
+    hashcode = sha1.hexdigest()
+    print("handle/GET func: hashcode, signature, timestamp, nonce, echostr, token: ", hashcode, signature, timestamp,
+          nonce, echostr)
+    if hashcode == signature:
+        print("OKOK")
+        return echostr
+    else:
+        pirnt("NO OK")
+        return ""
 
 
 if __name__ == '__main__':
