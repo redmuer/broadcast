@@ -166,6 +166,7 @@ def wexin_js_token():
     '''
     data = request.get_data(as_text=True)
     json_data = json.loads(data)
+    print("json_data",json_data)
     url = json_data["url"]
     print("wexin_js_token : url -- ",url)
     jsapi_ticket = env.get_wx_jsapi_ticket()
