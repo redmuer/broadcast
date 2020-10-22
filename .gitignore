@@ -3,3 +3,4 @@ db/*.pyc
 envs/**.pyc
 *.pyc
 *.xml
+envs/__pycache__/env_param.cpython-35.pyc
