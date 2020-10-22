@@ -41,16 +41,58 @@
 #     sign = Sign("38_RkQ8ksGumhIrmJwG5MlVLUIyoBNgcWuU0Dvq3Acfm--VHMgkchLhbPgf3tiYdlPo9qyImTRoZGLq5wReZgQZ-hz0l5_Fcet_E460oYnr2LWSOOOFg0cGAZWsrvD0ZT8XqN1r1LNscOnJ7j99HIGfAGANOM", 'http://wx.lbikechina.com/static/wx_test.html')
 #     print("sign.sign",sign.sign())
 
-import http.client
-import json
+# import http.client
+# import json
+#
+# conn = http.client.HTTPSConnection("api.weixin.qq.com")
+# conn.request("GET",
+#                      '/cgi-bin/ticket/getticket?access_token=%s&type=jsapi' % ('38_4hshUeHDE-q7_Phwj7_6sK5qHK9RhGYscUD5IPoD4VGLxbFFa_WVejSsqxi39WOrCJNjdT00Mi2YH2MsqZUhOzXemMBvmXMkoIu-vkR_i1KA94GwsiAOzluGmDlTUwiM7X-mSV6Pdo2QF1hCLXUcACAVHE'))
+# res = conn.getresponse()
+# result = str(res.read(), encoding='utf8')
+# print("wx_jsapi_ticket : ", result)
+#
+# result = json.loads(result)
+#
+# print(result['ticket'])
 
-conn = http.client.HTTPSConnection("api.weixin.qq.com")
-conn.request("GET",
-                     '/cgi-bin/ticket/getticket?access_token=%s&type=jsapi' % ('38_4hshUeHDE-q7_Phwj7_6sK5qHK9RhGYscUD5IPoD4VGLxbFFa_WVejSsqxi39WOrCJNjdT00Mi2YH2MsqZUhOzXemMBvmXMkoIu-vkR_i1KA94GwsiAOzluGmDlTUwiM7X-mSV6Pdo2QF1hCLXUcACAVHE'))
-res = conn.getresponse()
-result = str(res.read(), encoding='utf8')
-print("wx_jsapi_ticket : ", result)
+import time
+import random
+import string
+import hashlib
 
-result = json.loads(result)
+class Sign:
+    def __init__(self, jsapi_ticket, url):
+        self.ret = {
+            'nonceStr': self.__create_nonce_str(),
+            'jsapi_ticket': jsapi_ticket,
+            'timestamp': self.__create_timestamp(),
+            'url': url,
+            'appid':'wx55c990a2c8dcf77b'
+        }
 
-print(result['ticket'])
+    def __create_nonce_str(self):
+        return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
+
+    def __create_timestamp(self):
+        return int(time.time())
+
+    def sign(self):
+        string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
+        print(string)
+        self.ret['signature'] = hashlib.sha1(string.encode("utf8")).hexdigest()
+        return self.ret
+
+from envs.env_param import env
+
+appId = "wx55c990a2c8dcf77b"
+jsapi_ticket = env.get_wx_jsapi_ticket()
+url = 'http://wx.lbikechina.com/static/wx_test5.html'
+
+sign = Sign(jsapi_ticket, url)
+
+sign.sign()
+
+print("sing.url" , sign.ret["url"])
+print("sing.nonceStr" , sign.ret["nonceStr"])
+print("sign.timestamp", sign.ret["timestamp"])
+print("sign.signature", sign.ret["signature"])
