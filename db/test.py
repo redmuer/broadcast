@@ -38,5 +38,5 @@ if __name__ == '__main__':
     # 注意 URL 一定要动态获取，不能 hardcode
     # sign = Sign('jsapi_ticket', 'http://example.com')
 
-    sign = Sign(jsapi_ticket, 'http://wx.lbikechina.com/static/wx_test.html')
+    sign = Sign("38_RkQ8ksGumhIrmJwG5MlVLUIyoBNgcWuU0Dvq3Acfm--VHMgkchLhbPgf3tiYdlPo9qyImTRoZGLq5wReZgQZ-hz0l5_Fcet_E460oYnr2LWSOOOFg0cGAZWsrvD0ZT8XqN1r1LNscOnJ7j99HIGfAGANOM", 'http://wx.lbikechina.com/static/wx_test.html')
     print("sign.sign",sign.sign())
