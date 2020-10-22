@@ -209,7 +209,7 @@ if __name__ == '__main__':
     db_utils = db_utils()
     start_long = 0
     timer = threading.Timer(1, fun_timer)
-    timer.start()
+    # timer.start()
 
     env.get_wx_jsapi_ticket()
 
