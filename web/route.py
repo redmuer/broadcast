@@ -166,10 +166,11 @@ def wexin_js_token():
     '''
     data = request.get_data(as_text=True)
     json_data = json.loads(data)
+    url = json_data["url"]
+    print("wexin_js_token : url -- ",url)
+    jsapi_ticket = env.get_wx_jsapi_ticket()
 
-    jsapi_ticket = env.get_wx_tocke()
-
-    sign = Sign(jsapi_ticket, 'http://wx.lbikechina.com/static/wx_test.html')
+    sign = Sign(jsapi_ticket, url)
     print(sign)
     return jsonify(sign.sign())
 
@@ -209,6 +210,6 @@ if __name__ == '__main__':
     timer = threading.Timer(1, fun_timer)
     timer.start()
 
-    env.get_wx_tocke()
+    env.get_wx_jsapi_ticket()
 
     app.run(host='0.0.0.0',port=80)

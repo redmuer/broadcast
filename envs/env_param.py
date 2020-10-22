@@ -7,18 +7,26 @@ class env:
     root_dir = ''
     wx_tocken = None
 
+    wx_jsapi_ticket = None
+
     @classmethod
-    def get_wx_tocke(cls):
-        print("test")
+    def get_wx_token(cls):
         if None == cls.wx_tocken:
-            cls.wx_tocken = cls.https_wx_tocken()
+            cls.wx_tocken = cls.https_wx_token()
 
         print("token : ",cls.wx_tocken)
         return cls.wx_tocken
 
+    @classmethod
+    def get_wx_jsapi_ticket(cls):
+        if None == cls.wx_jsapi_ticket:
+            cls.wx_jsapi_ticket = cls.https_wx_jsapi_ticket()
+
+        print("jsapi_ticket : ", cls.wx_jsapi_ticket)
+        return cls.wx_jsapi_ticket
 
     @classmethod
-    def https_wx_tocken(cls):
+    def https_wx_token(cls):
         conn = http.client.HTTPSConnection("api.weixin.qq.com")
         conn.request("GET",
                      '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c')
@@ -30,3 +38,19 @@ class env:
         result = json.loads(result)
 
         return result['access_token']
+
+    @classmethod
+    def https_wx_jsapi_ticket(cls):
+        token = cls.get_wx_token()
+
+        conn = http.client.HTTPSConnection("api.weixin.qq.com")
+        conn.request("GET",
+                     '/cgi-bin/ticket/getticket?access_token=%s&type=jsapi' % (token))
+
+        res = conn.getresponse()
+        result = str(res.read(), encoding='utf8')
+        print("wx_jsapi_ticket : ", result)
+
+        result = json.loads(result)
+
+        return result['ticket']

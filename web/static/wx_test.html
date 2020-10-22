@@ -11,11 +11,13 @@
                 type: "POST",
                 url: "/weixin/js_token",
                 contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({}),
+                data: JSON.stringify({
+                    url:window.location.href
+                }),
                 dataType: "json",
                 success: function (message) {
-                    alert(message.signature);
-                    alert(message.appid);
+                    alert("signature : "+message.signature);
+                    alert("appid : "+message.appid);
                     wx.config({
                         debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
                         appId: message.appid, // 必填，公众号的唯一标识
@@ -32,7 +34,7 @@
                         wx.updateAppMessageShareData({
                             title: '123', // 分享标题
                             desc: '456', // 分享描述
-                            link: 'http://wx.lbikechina.com/static/wx_test.html', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
+                            link: window.location.href, // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
                             imgUrl: '', // 分享图标
                             success: function () {
                                 console.log(11)
