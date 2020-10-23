@@ -210,10 +210,11 @@ def weixin_snspi():
     网页授权认证
     :return:
     '''
+    print("11111111111")
     print("request.args ： ",request.args)
 
     # return app.send_static_file('wx_test1.html')
-    return redirect('/static/wx_test1.html')
+    return redirect('/static/wx_test5.html')
 
 if __name__ == '__main__':
     env.root_dir = sys.argv[0][0:-12]
