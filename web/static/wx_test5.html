@@ -6,65 +6,11 @@
     <script type="text/javascript" src="/static/m/lib/jquery/1.9.1/jquery.min.js"></script>
     <script src="http://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
     <script>
-        $(function(){
-            $.ajax({
-                type: "POST",
-                url: "/weixin/js_token",
-                contentType: "application/json; charset=utf-8",
-                data: JSON.stringify({
-                    url:"http://wx.lbikechina.com/static/wx_test4.html"
-                }),
-                dataType: "json",
-                success: function (message) {
-                    //alert("signature : "+message.signature);
-                    //alert("appid : "+message.appid);
-                    //alert("herf : " + location.href.split('#')[0])
-                    alert("")
-                    wx.config({
-                        debug: true, // 开启调试模式,调用的所有api的返回值会在客户端alert出来，若要查看传入的参数，可以在pc端打开，参数信息会通过log打出，仅在pc端时才会打印。
-                        appId: 'wx55c990a2c8dcf77b', // 必填，公众号的唯一标识
-                        timestamp: '1603338391', // 必填，生成签名的时间戳
-                        nonceStr: 'bKHM782Wj7baPEQ', // 必填，生成签名的随机串
-                        signature: '868edc95c1aa30cda20521aeb21f48060d92c958',// 必填，签名
-                        jsApiList: [
-                            'updateAppMessageShareData'
-                            //'updateTimelineShareData'
-                        ] // 必填，需要使用的JS接口列表
-                    });
-
-                    wx.ready(function () {   //需在用户可能点击分享按钮前就先调用
-                        wx.updateAppMessageShareData({
-                            title: '123', // 分享标题
-                            desc: '456', // 分享描述
-                            link: "http://wx.lbikechina.com/static/wx_test4.html", // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                            imgUrl: '', // 分享图标
-                            success: function () {
-                                console.log(11)
-                            }
-                        });
-
-                        wx.updateTimelineShareData({
-                            title: '', // 分享标题
-                            link: '', // 分享链接，该链接域名或路径必须与当前页面对应的公众号JS安全域名一致
-                            imgUrl: '', // 分享图标
-                            success: function () {
-                                // 设置成功
-                            }
-                        });
-                    });
-
-                },
-                error: function (message) {
-            	    alert(message)
-                    alert("retry")
-                }
-	        });
 
 
-        });
     </script>
 </head>
 
 <body>
-生成签名之前必须先了解一下jsapi_ticket，jsapi_ticket是公众号用于调用微信JS接口的临时票据。正常情况下，jsapi_ticket的有效期为7200秒，通过access_token来获取。由于获取jsapi_ticket的api调用次数非常有限，频繁刷新jsapi_ticket会导致api调用受限，影响自身业务，开发者必须在自己的服务全局缓存jsapi_ticket 。
+aaa
 </body>

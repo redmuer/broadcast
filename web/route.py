@@ -210,7 +210,7 @@ def weixin_snspi():
     网页授权认证
     :return:
     '''
-    print(request.args)
+    print("request.args ： ",request.args)
 
     # return app.send_static_file('wx_test1.html')
     return redirect('/static/wx_test1.html')
