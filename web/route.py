@@ -210,8 +210,16 @@ def weixin_snspi():
     网页授权认证
     :return:
     '''
-    print("11111111111")
+
     print("request.args ： ",request.args)
+
+    bill_pull_id = reqquest.args.get("state")
+    wx_code = request.args.get("code")
+
+    open_id = env.https_wx_access_tocken(wx_code)
+
+    #https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
+    print("openId :", open_id)
 
     return app.send_static_file('wx_test5.html')
     # return redirect('/static/wx_test5.html')

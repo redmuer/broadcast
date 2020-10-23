@@ -40,6 +40,20 @@ class env:
         return result['access_token']
 
     @classmethod
+    def https_wx_access_tocken(self, code):
+        conn = http.client.HTTPSConnection("api.weixin.qq.com")
+        conn.request("GET",
+                     '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=%s&grant_type=authorization_code' % （code）)
+
+        res = conn.getresponse()
+        result = str(res.read(), encoding='utf8')
+        print("wx_access_token : ", result)
+
+        result = json.loads(result)
+
+        return result['openid']
+
+    @classmethod
     def https_wx_jsapi_ticket(cls):
         token = cls.get_wx_token()
 

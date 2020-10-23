@@ -99,16 +99,27 @@
 
 
 # url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
-
-import urllib.parse
-url_1="http://wx.lbikechina.com/static/bill"
-data=urllib.parse.quote(url_1)
-print(data)
+#
+# import urllib.parse
+# url_1="http://wx.lbikechina.com/static/bill"
+# data=urllib.parse.quote(url_1)
+# print(data)
 
 
 #url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill&response_type=code&scope=snsapi_userinfo&state=3#wechat_redirect"
 
-#url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1&response_type=code&scope=snsapi_userinfo&state=3#wechat_redirect"
+#url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1&response_type=code&scope=snsapi_base&state=3#wechat_redirect"
 
 
 #http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1
+
+
+import http.client
+conn = http.client.HTTPSConnection("api.weixin.qq.com")
+conn.request("GET",
+                     '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=011mbsGa19jHRz0qLaGa1fXsCq1mbsGV&grant_type=authorization_code')
+
+
+res = conn.getresponse()
+result = str(res.read(), encoding='utf8')
+print("wx_access_token : ", result)
