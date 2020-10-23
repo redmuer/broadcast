@@ -158,22 +158,23 @@ def logon():
 
 #------------------------微信--------------------#
 
-@app.route('/weixin/js_token',methods=['POST'])
-def wexin_js_token():
-    '''
-    生成微信JS-JDK所需的认证
-    :return:
-    '''
-    data = request.get_data(as_text=True)
-    json_data = json.loads(data)
-    print("json_data",json_data)
-    url = json_data["url"]
-    print("wexin_js_token : url -- ",url)
-    jsapi_ticket = env.get_wx_jsapi_ticket()
-
-    sign = Sign(jsapi_ticket, url)
-    print(sign)
-    return jsonify(sign.sign())
+#@app.route('/weixin/js_token',methods=['POST'])
+# def wexin_js_token():
+#     '''
+#     生成微信JS-JDK所需的认证
+#     :return:
+#     '''
+#     data = request.get_data(as_text=True)
+#     json_data = json.loads(data)
+#     print("json_data",json_data)
+#     url = json_data["url"]
+#     print("wexin_js_token : url -- ",url)
+#     jsapi_ticket = env.get_wx_jsapi_ticket()
+#
+#     sign = Sign(jsapi_ticket, url)
+#     result = sign.sign()
+#     print("ret signature : ",result)
+#     return jsonify(result)
 
 
 @app.route('/weixin/auth', methods=['GET'])
@@ -203,6 +204,16 @@ def weixin_auth():
         pirnt("NO OK")
         return ""
 
+@app.route('/static/bill', methods=['GET'])
+def weixin_snspi():
+    '''
+    网页授权认证
+    :return:
+    '''
+    print(request.args)
+
+    # return app.send_static_file('wx_test1.html')
+    return redirect('/static/wx_test1.html')
 
 if __name__ == '__main__':
     env.root_dir = sys.argv[0][0:-12]
@@ -211,6 +222,6 @@ if __name__ == '__main__':
     timer = threading.Timer(1, fun_timer)
     # timer.start()
 
-    env.get_wx_jsapi_ticket()
+    # env.get_wx_jsapi_ticket()
 
     app.run(host='0.0.0.0',port=80)

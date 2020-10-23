@@ -55,44 +55,49 @@
 #
 # print(result['ticket'])
 
-import time
-import random
-import string
-import hashlib
+# import time
+# import random
+# import string
+# import hashlib
+#
+# class Sign:
+#     def __init__(self, jsapi_ticket, url):
+#         self.ret = {
+#             'nonceStr': self.__create_nonce_str(),
+#             'jsapi_ticket': jsapi_ticket,
+#             'timestamp': self.__create_timestamp(),
+#             'url': url,
+#             'appid':'wx55c990a2c8dcf77b'
+#         }
+#
+#     def __create_nonce_str(self):
+#         return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
+#
+#     def __create_timestamp(self):
+#         return int(time.time())
+#
+#     def sign(self):
+#         string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
+#         print(string)
+#         self.ret['signature'] = hashlib.sha1(string.encode("utf8")).hexdigest()
+#         return self.ret
+#
+# from envs.env_param import env
+#
+# appId = "wx55c990a2c8dcf77b"
+# jsapi_ticket = env.get_wx_jsapi_ticket()
+# url = 'http://wx.lbikechina.com/static/wx_test5.html'
+#
+# sign = Sign(jsapi_ticket, url)
+#
+# sign.sign()
+#
+# print("sing.url" , sign.ret["url"])
+# print("sing.nonceStr" , sign.ret["nonceStr"])
+# print("sign.timestamp", sign.ret["timestamp"])
+# print("sign.signature", sign.ret["signature"])
 
-class Sign:
-    def __init__(self, jsapi_ticket, url):
-        self.ret = {
-            'nonceStr': self.__create_nonce_str(),
-            'jsapi_ticket': jsapi_ticket,
-            'timestamp': self.__create_timestamp(),
-            'url': url,
-            'appid':'wx55c990a2c8dcf77b'
-        }
 
-    def __create_nonce_str(self):
-        return ''.join(random.choice(string.ascii_letters + string.digits) for _ in range(15))
+# url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxf0e81c3bee622d60&redirect_uri=http%3A%2F%2Fnba.bluewebgame.com%2Foauth_response.php&response_type=code&scope=snsapi_userinfo&state=STATE#wechat_redirect"
 
-    def __create_timestamp(self):
-        return int(time.time())
-
-    def sign(self):
-        string = '&'.join(['%s=%s' % (key.lower(), self.ret[key]) for key in sorted(self.ret)])
-        print(string)
-        self.ret['signature'] = hashlib.sha1(string.encode("utf8")).hexdigest()
-        return self.ret
-
-from envs.env_param import env
-
-appId = "wx55c990a2c8dcf77b"
-jsapi_ticket = env.get_wx_jsapi_ticket()
-url = 'http://wx.lbikechina.com/static/wx_test5.html'
-
-sign = Sign(jsapi_ticket, url)
-
-sign.sign()
-
-print("sing.url" , sign.ret["url"])
-print("sing.nonceStr" , sign.ret["nonceStr"])
-print("sign.timestamp", sign.ret["timestamp"])
-print("sign.signature", sign.ret["signature"])
+#url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.llikechina.com%2Fstatic%2Fbill&response_type=code&scope=snsapi_userinfo&state=3#wechat_redirect"
