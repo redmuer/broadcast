@@ -108,7 +108,7 @@
 
 #url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill&response_type=code&scope=snsapi_userinfo&state=3#wechat_redirect"
 
-#url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1&response_type=code&scope=snsapi_base&state=3#wechat_redirect"
+#url = "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=https%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1&response_type=code&scope=snsapi_base&state=3#wechat_redirect"
 
 
 #http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1
