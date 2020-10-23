@@ -46,7 +46,7 @@ class env:
                      '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=%s&grant_type=authorization_code' % (code))
 
         res = conn.getresponse()
-        print("res : ", res.readlines())
+        print("res : ", res)
         result = str(res.read(), encoding='utf8')
         print("wx_access_token : ", result)
 
