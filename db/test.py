@@ -114,12 +114,34 @@
 #http%3A%2F%2Fwx.lbikechina.com%2Fstatic%2Fbill%3Fbill%3D1
 
 
-import http.client
-conn = http.client.HTTPSConnection("api.weixin.qq.com")
-conn.request("GET",
-                     '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=011mbsGa19jHRz0qLaGa1fXsCq1mbsGV&grant_type=authorization_code')
+# import http.client
+# conn = http.client.HTTPSConnection("api.weixin.qq.com")
+# conn.request("GET",
+#                      '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=011mbsGa19jHRz0qLaGa1fXsCq1mbsGV&grant_type=authorization_code')
+#
+#
+# res = conn.getresponse()
+# result = str(res.read(), encoding='utf8')
+# print("wx_access_token : ", result)
 
+st = "authorization_code HTTP/1.1 200 OK"
+if st.find("authorization_code") == 0:
+    st = st[18:]
 
-res = conn.getresponse()
-result = str(res.read(), encoding='utf8')
-print("wx_access_token : ", result)
+print(st.split(None,2))
+
+# print("authorization_code HTTP/1.1 200 OK".split(None,1))
+# print('GET /static/bill?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200'.split(None, 2))
+
+# import http.client
+# conn = http.client.HTTPSConnection("www.jb51.net")
+# conn.request("GET",'article/62726.htm')
+#
+# res = conn.getresponse()
+#
+# result = str(res.read(), encoding='utf8')
+#
+# print(result)
+
+# authorization_code HTTP/1.1 200 OK
+# HTTP/1.1 400 Bad Request
