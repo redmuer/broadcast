@@ -213,7 +213,7 @@ def weixin_snspi():
 
     print("request.args ： ",request.args)
 
-    bill_pull_id = reqquest.args.get("state")
+    bill_pull_id = request.args.get("state")
     wx_code = request.args.get("code")
 
     open_id = env.https_wx_access_tocken(wx_code)
