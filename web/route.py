@@ -213,7 +213,7 @@ def weixin_snspi():
     print("11111111111")
     print("request.args ： ",request.args)
 
-    return app.send_static_file('wx_test1.html')
+    return app.send_static_file('wx_test5.html')
     # return redirect('/static/wx_test5.html')
 
 if __name__ == '__main__':
@@ -225,4 +225,4 @@ if __name__ == '__main__':
 
     # env.get_wx_jsapi_ticket()
 
-    app.run(host='0.0.0.0',port=80)
+    app.run(host='0.0.0.0',port=80 , debug=True)
