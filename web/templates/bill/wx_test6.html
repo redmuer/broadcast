@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>aaaaa</title>
+    <script type="text/javascript" src="/static/m/lib/jquery/1.9.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+aaa
+<h2>{{test}}</h2>
+<button id="product" value="aaa">购买</button>
+<input type="hidden" id="bill_id" value="{{_bill_id}}"></input>
+<input type="hidden" id="open_id" value="{{_open_id}}"></input>
+<input type="hidden" id="pull_id" value="{{_pull_id}}"></input>
+
+<h2>count : {{count}}</h2>
+</body>
+<script type="text/javascript">
+$(function(){
+   $("#product").click(function(){
+
+       console.log("bill_id : " + $("#bill_id").val())
+
+       $.ajax({
+            type: "POST",
+            url: "/bill/reserve",
+            contentType: "application/json; charset=utf-8",
+            data: JSON.stringify({
+                bill_id:$("#bill_id").val(),
+                open_id:$("#open_id").val(),
+                pull_id:$("#pull_id").val(),
+                product_id:$("#product").val()
+            }),
+            dataType: "json",
+            success: function (message) {
+                alert("预定成功，10月30日直播间见")
+            },
+            error: function (message) {
+                alert("retry")
+            }
+	});
+   });
+
+});
+</script>

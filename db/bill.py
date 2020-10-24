@@ -45,15 +45,18 @@ class bill_pull:
     def __repr__(self):
         return repr((self.fid, self.bill_id, self.url_param, self.des, self.build_time, self.is_del))
 
-class bill_proxy:
+class bill_proxy(object):
 
     _instance_lock = threading.Lock()
 
+    _instance = None
+
     def __new__(cls, *args, **kwargs):
-        if not hasattr(bill_proxy, "_instance"):
+        if None == cls._instance:
             with bill_proxy._instance_lock:
-                if not hasattr(bill_proxy, "_instance"):
-                    bill_proxy._instance = object.__new__(cls)
+                if None == cls._instance:
+                    bill_proxy._instance = super().__new__(cls)
+
         return bill_proxy._instance
 
     def __init__(self):
@@ -194,4 +197,5 @@ class bill_proxy:
             return count_row[0]
         else:
             return 0
+
 

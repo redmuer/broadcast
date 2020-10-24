@@ -39,7 +39,8 @@ create table if not exists commodity_reserve (
 fid varchar(200) primary key not null,
 bill_commodity_id varchar(200),
 bill_pull_id varchar(200),
-visitor varchar(200)
+visitor varchar(200),
+reserve_time time
 );
 
 

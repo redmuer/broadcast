@@ -5,6 +5,7 @@ import json
 
 class env:
     root_dir = ''
+    db_dir = ''
     wx_tocken = None
 
     wx_jsapi_ticket = None
@@ -50,7 +51,6 @@ class env:
                      # '/cgi-bin/token?grant_type=client_credential&appid=wx55c990a2c8dcf77b&secret=8921f0cc72b4e6eb1170828ae4cdea6c&code=%s&grant_type=authorization_code' % (code))
         # https: // api.weixin.qq.com / sns / oauth2 / access_token?appid = APPID & secret = SECRET & code = CODE & grant_type = authorization_code
         res = conn.getresponse()
-        print("res : ", res)
         result = str(res.read(), encoding='utf8')
         print("wx_access_token : ", result)
 

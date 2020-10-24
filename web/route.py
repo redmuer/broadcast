@@ -8,6 +8,7 @@ from db.db_app import db_utils
 from envs.env_param import env
 from db.bill import bill_proxy
 from db.product import product_proxy
+from db.bill_access import bill_access_proxy
 from db.wx import Sign
 import hashlib
 import threading
@@ -93,6 +94,22 @@ def save_bill():
     proxy.save(json_data)
 
     return 'afdasdfasdff'
+
+@app.route('/bill/reserve', methods=['POST'])
+def reserve_product():
+    '''
+    海报预约产品
+    :return:
+    '''
+    json_data = json.loads(request.get_data(as_text=True))
+    print(json_data)
+
+    proxy = product_proxy()
+    proxy.reserve_product(json_data)
+
+    result = {"error_code":"0"}
+
+    return jsonify(result)
 #------------------------海报路由 结束----------------------------
 
 #------------------------商品路由 开始----------------------------
@@ -176,7 +193,6 @@ def logon():
 #     print("ret signature : ",result)
 #     return jsonify(result)
 
-
 @app.route('/weixin/auth', methods=['GET'])
 def weixin_auth():
     '''
@@ -204,6 +220,11 @@ def weixin_auth():
         pirnt("NO OK")
         return ""
 
+
+@app.route('/test',methods=['GET'])
+def test():
+    return render_template('/bill/wx_test6.html',_bill_id='xxx',_pull_id='yyy',_open_id='zzz')
+
 @app.route('/static/bill', methods=['GET'])
 def weixin_snspi():
     '''
@@ -213,19 +234,35 @@ def weixin_snspi():
 
     print("request.args ： ",request.args)
 
-    bill_pull_id = request.args.get("state")
+    bill_id = request.args.get("bill_id")
+    pull_id = request.args.get("pull_id")
+    # bill_pull_id = request.args.get("state")
     wx_code = request.args.get("code")
 
     open_id = env.https_wx_access_tocken(wx_code)
 
-    #https://api.weixin.qq.com/sns/oauth2/access_token?appid=APPID&secret=SECRET&code=CODE&grant_type=authorization_code
-    print("openId :", open_id)
+    print("open_id",open_id)
 
-    return app.send_static_file('wx_test5.html')
+    param = {
+        "bill_id":bill_id,
+        "bill_pull_id":pull_id,
+        "open_id":open_id
+    }
+
+    proxy = bill_access_proxy()
+    proxy.save_access(param)
+
+    ## 为页面商品赋值，本应该从后台取值，这里为了简化，直接写在页面中，仅把pull_id,bill_id和open_id穿进去
+
+
+    return render_template('/bill/wx_test6.html',_bill_id='xxx',_pull_id=pull_id,_open_id=open_id)
+    # return app.send_static_file('wx_test5.html')
     # return redirect('/static/wx_test5.html')
 
 if __name__ == '__main__':
+    print(sys.argv[0])
     env.root_dir = sys.argv[0][0:-12]
+    env.db_dir = sys.argv[0][0:-22]
     db_utils = db_utils()
     start_long = 0
     timer = threading.Timer(1, fun_timer)
@@ -233,4 +270,4 @@ if __name__ == '__main__':
 
     # env.get_wx_jsapi_ticket()
 
-    app.run(host='0.0.0.0',port=80 , debug=True)
+    app.run(host='0.0.0.0',port=80 , debug=True, use_reloader=False)

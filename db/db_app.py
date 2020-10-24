@@ -5,24 +5,27 @@ import threading
 from envs.env_param import env
 
 
-class db_utils:
+class db_utils(object):
 
     _instance_lock = threading.Lock()
 
+    _instance = None
+
     def __new__(cls, *args, **kwargs):
-        if not hasattr(db_utils, "_instance"):
+        if None == cls._instance:
             with db_utils._instance_lock:
-                if not hasattr(db_utils, "_instance"):
-                    db_utils._instance = object.__new__(cls)
+                if None == cls._instance:
+                    db_utils._instance = super().__new__(cls)
                     cls.table_init(cls)
+
         return db_utils._instance
 
     def __init__(self):
         pass
 
+
     def table_init(self):
-        print("env.root_dir",env.root_dir)
-        conn = sqlite3.connect('%s%s' % (env.root_dir, 'db/broadcast.db'))
+        conn = sqlite3.connect('%s%s' % (env.db_dir, 'broadcast.db'))
         print('broadcast successfully')
         print('create table')
         sql_str = ''
@@ -35,6 +38,7 @@ class db_utils:
 
         c = conn.cursor()
         for sql in sqls:
+            print(sql)
             c.execute(sql)
             print('create table successfully')
 
@@ -50,7 +54,7 @@ class db_utils:
         print('sql', sql)
         print('param', param)
         try:
-            conn = sqlite3.connect('%s%s' % (env.root_dir, 'db/broadcast.db'))
+            conn = sqlite3.connect('%s%s' % (env.db_dir, 'broadcast.db'))
             cursor = conn.cursor()
             cursor.execute(sql, param)
             conn.commit()
@@ -71,7 +75,7 @@ class db_utils:
         if columns:
             result.append(columns)
         try:
-            conn = sqlite3.connect('%s%s' % (env.root_dir, 'db/broadcast.db'))
+            conn = sqlite3.connect('%s%s' % (env.db_dir, 'broadcast.db'))
             cursor = conn.cursor()
             st = cursor.execute(sql, param)
             for row in st:

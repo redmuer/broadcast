@@ -34,14 +34,17 @@ class product_base:
                      self.total_count, self.revenue_count, self.price))
 
 
-class product_proxy:
+class product_proxy(object):
     _instance_lock = threading.Lock()
 
+    _instance = None
+
     def __new__(cls, *args, **kwargs):
-        if not hasattr(product_proxy, "_instance"):
+        if None == cls._instance:
             with product_proxy._instance_lock:
-                if not hasattr(product_proxy, "_instance"):
-                    product_proxy._instance = object.__new__(cls)
+                if None == cls._instance:
+                    product_proxy._instance = super().__new__(cls)
+
         return product_proxy._instance
 
     def __init__(self):
@@ -74,6 +77,34 @@ class product_proxy:
             print("err", err)
             return False
 
+    def reserve_product(self, json_data):
+        sql = "insert into commodity_reserve values(?,?,?,?,?)"
+
+        param = (
+            str(uuid.uuid4()),
+            json_data['product_id'],
+            json_data['pull_id'],
+            json_data['open_id'],
+            datetime.now()
+        )
+
+        util = db_utils()
+        util.exec_alone(sql,param)
+
+
+
+    def get_product_by_bill(self, json_data = None):
+        sql = 'select * from bill_commodity_base where bill_id = ?'
+        param = (
+            json_data['bill_id'],
+        )
+
+        util = db_utils()
+        product_rows = util.select(sql, param)
+
+        result = util.change_to_js(product_rows, ['fid', 'bill_id','fname','url','total_count','revenue_count','price'])
+
+        return result
 
     def get_all_product(self, json_data=None):
         '''
