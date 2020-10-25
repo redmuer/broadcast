@@ -263,6 +263,7 @@ if __name__ == '__main__':
     print(sys.argv[0])
     env.root_dir = sys.argv[0][0:-12]
     env.db_dir = sys.argv[0][0:-22]
+    print("env.db_dir : ",env.db_dir)
     db_utils = db_utils()
     start_long = 0
     timer = threading.Timer(1, fun_timer)
