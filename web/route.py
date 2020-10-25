@@ -167,7 +167,7 @@ def logon():
     if (user_name == 'm_test') and (password == 'zhengzhou'):
         print('OK')
         session['username'] = user_name
-        return {'error_code' : "0"}
+        return jsonify{'error_code' : "0"}
     else:
         print('NO')
         result = {'error_code' : "1"}
