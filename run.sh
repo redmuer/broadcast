@@ -1,1 +1,1 @@
-sudo /home/ec2-user/miniconda3/envs/python3.5/bin/python web/route.py
+/root/miniconda3/envs/python3.5/bin/python  /root/app/broadcast/web/route.py
