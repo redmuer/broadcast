@@ -6,3 +6,7 @@ envs/**.pyc
 envs/__pycache__/env_param.cpython-35.pyc
 db/__pycache__/*
 envs/__pycache__/*
+__pycache__/
+db/__pycache__/
+envs/__pycache__/
+web/__pycache__/
