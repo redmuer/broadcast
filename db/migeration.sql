@@ -20,6 +20,7 @@ is_del int
 create table if not exists bill_access (
 fid varchar(200) primary key not null,
 bill_id varchar(200),
+bill_pull_id varchar(200),
 visitor varchar(200),
 visit_time time,
 visit_long float
