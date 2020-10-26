@@ -223,7 +223,7 @@ def weixin_auth():
 
 @app.route('/test',methods=['GET'])
 def test():
-    return render_template('/bill/wx_test6.html',_bill_id='xxx',_pull_id='yyy',_open_id='zzz')
+    return render_template('/bill/pull1.html',_bill_id='xxx',_pull_id='yyy',_open_id='zzz')
 
 @app.route('/static/bill', methods=['GET'])
 def weixin_snspi():
@@ -252,10 +252,18 @@ def weixin_snspi():
     proxy = bill_access_proxy()
     proxy.save_access(param)
 
+    print('bill_id',bill_id)
+    print('pull_id',pull_id)
+    print('open_id',open_id)
+
     ## 为页面商品赋值，本应该从后台取值，这里为了简化，直接写在页面中，仅把pull_id,bill_id和open_id穿进去
+    send_url = ''
+    if pull_id == 'pull1':
+        send_url = '/bill/pull1.html'
+    else:
+        send_url = '/bill/pull2.html'
 
-
-    return render_template('/bill/wx_test6.html',_bill_id='xxx',_pull_id=pull_id,_open_id=open_id)
+    return render_template(send_url,_bill_id=bill_id,_pull_id=pull_id,_open_id=open_id)
     # return app.send_static_file('wx_test5.html')
     # return redirect('/static/wx_test5.html')
 
