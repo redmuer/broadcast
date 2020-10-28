@@ -223,7 +223,7 @@ def weixin_auth():
 
 @app.route('/test',methods=['GET'])
 def test():
-    return render_template('/bill/pull1.html',_bill_id='xxx',_pull_id='yyy',_open_id='zzz')
+    return render_template('/bill/wx_test6.html',_bill_id='xxx',_pull_id='yyy',_open_id='zzz')
 
 @app.route('/static/bill', methods=['GET'])
 def weixin_snspi():
