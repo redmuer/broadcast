@@ -124,11 +124,11 @@
 # result = str(res.read(), encoding='utf8')
 # print("wx_access_token : ", result)
 
-st = "authorization_code HTTP/1.1 200 OK"
-if st.find("authorization_code") == 0:
-    st = st[18:]
-
-print(st.split(None,2))
+# st = "authorization_code HTTP/1.1 200 OK"
+# if st.find("authorization_code") == 0:
+#     st = st[18:]
+#
+# print(st.split(None,2))
 
 # print("authorization_code HTTP/1.1 200 OK".split(None,1))
 # print('GET /static/bill?__debugger__=yes&cmd=resource&f=style.css HTTP/1.1" 200'.split(None, 2))
@@ -145,3 +145,7 @@ print(st.split(None,2))
 
 # authorization_code HTTP/1.1 200 OK
 # HTTP/1.1 400 Bad Request
+
+a = {'a':'1','b':'2'}
+print(type(a))
+print('a' in a)
