@@ -56,7 +56,7 @@ class env:
 
         result = json.loads(result)
 
-        return result['openid']
+        return result
 
     @classmethod
     def https_wx_jsapi_ticket(cls):

@@ -239,7 +239,12 @@ def weixin_snspi():
     # bill_pull_id = request.args.get("state")
     wx_code = request.args.get("code")
 
-    open_id = env.https_wx_access_tocken(wx_code)
+    tocken_result = env.https_wx_access_tocken(wx_code)
+
+    if tocken_result.has_key("errcode"):
+        return redirect('https://open.weixin.qq.com/connect/oauth2/authorize?appid=wx55c990a2c8dcf77b&redirect_uri=http%3A%2F%2Fwx1.lbikechina.com%2Fstatic%2Fbill%3Fbill_id%3De8226b69-336e-4e47-af25-dd959abad8a5%26pull_id%3Dpull2&response_type=code&scope=snsapi_userinfo&state=3#wechat_redirect')
+
+    open_id = tocken_result['openid']
 
     print("open_id",open_id)
 
